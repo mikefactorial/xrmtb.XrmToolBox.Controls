@@ -432,7 +432,7 @@ namespace xrmtb.XrmToolBox.Controls
                                             "solutionpackageversion", "solutiontype", "parentsolutionid",  
                                             "createdonbehalfby", "configurationpageid", "organizationid")
             };
-
+            query.AddOrder("friendlyname", OrderType.Ascending);
             // Add link-entity QEsolution_publisher
             var publink = query.AddLink("publisher", "publisherid", "publisherid", JoinOperator.Inner);
             publink.EntityAlias = "pub";
