@@ -189,7 +189,7 @@ namespace xrmtb.XrmToolBox.Controls
                             (ent.Attributes.ContainsKey("description")) ? (string)ent["description"] : "", 
                             ent);
 
-            comboSolutions.DataSource = items.OrderBy(e => e.Name).ToList();
+            comboSolutions.DataSource = items.OrderBy(e => e.DisplayName).ToList();
             comboSolutions.DisplayMember = "SummaryName";
             comboSolutions.ValueMember = "Name";
 

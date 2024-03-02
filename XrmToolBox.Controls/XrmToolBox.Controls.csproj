@@ -183,7 +183,9 @@
     <Compile Include="Controls\CDSDataTextBox.Designer.cs">
       <DependentUpon>CDSDataTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CDSLookupDialog.cs" />
+    <Compile Include="Controls\CDSLookupDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\CDSLookupDialogForm.cs">
       <SubType>Form</SubType>
     </Compile>
