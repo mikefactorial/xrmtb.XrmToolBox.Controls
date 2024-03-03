@@ -116,25 +116,6 @@ namespace xrmtb.XrmToolBox.Controls
             get { return _config.RetrieveAsIfPublished; }
             set { _config.RetrieveAsIfPublished = value; }
         }
-
-        /// <summary>
-        /// Reference to the Solution Drop Down control
-        /// </summary>
-        public SolutionsDropdownControl SolutionsDropDown => this.solutionsDropdown;
-        /// <summary>
-        /// Reference to the Check All or None Check Box control
-        /// </summary>
-        public CheckBox CheckBoxCheckAllNone => this.checkBoxCheckAllNone;
-        /// <summary>
-        /// Reference to the List View control
-        /// </summary>
-        public ListView EntityListView => this.ListViewMain;
-
-        /// <summary>
-        /// Reference to the Split Container in the ToolBar
-        /// </summary>
-        public SplitContainer SplitContainerToolbar => this.splitContainerToolbar;
-
         #endregion
 
         #region Runtime Properties

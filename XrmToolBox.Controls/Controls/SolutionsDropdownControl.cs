@@ -206,10 +206,6 @@ namespace xrmtb.XrmToolBox.Controls
         /// Type of solutions to show in the drop down
         /// </summary>
         public SolutionType SolutionType { get; set; }
-        /// <summary>
-        /// Reference to the Combo Box control
-        /// </summary>
-        public ComboBox ComboBox => comboSolutions;
         #endregion 
         #region Control event handlers
 
