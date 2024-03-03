@@ -15,24 +15,6 @@ namespace xrmtb.XrmToolBox.Controls
     /// </summary>
     public class CrmActions
     {
-        /// <summary>
-        /// Solution types
-        /// </summary>
-        public enum SolutionType
-        {
-            /// <summary>
-            /// Both Managed and Unmanaged Solutions
-            /// </summary>
-            Both,
-            /// <summary>
-            /// Managed Solutions
-            /// </summary>
-            Managed,
-            /// <summary>
-            /// Unmanaged Solutions
-            /// </summary>
-            Unmanaged
-        }
         #region Entities
         /// <summary>
         /// Rerieve all entities with the given filter conditions
@@ -441,9 +423,8 @@ namespace xrmtb.XrmToolBox.Controls
         /// </summary>
         /// <param name="service"></param>
         /// <param name="publisherFilters"></param>
-        /// <param name="type"></param>
         /// <returns></returns>
-        public static List<Entity> RetrieveSolutions(IOrganizationService service, SolutionType type, List<string> publisherFilters = null)
+        public static List<Entity> RetrieveSolutions(IOrganizationService service, List<string> publisherFilters = null)
         {
             var query = new QueryExpression("solution") {
                 ColumnSet = new ColumnSet("solutionid", "uniquename", "friendlyname", "description", "publisherid", "isvisible", "ismanaged",
@@ -451,11 +432,6 @@ namespace xrmtb.XrmToolBox.Controls
                                             "solutionpackageversion", "solutiontype", "parentsolutionid",  
                                             "createdonbehalfby", "configurationpageid", "organizationid")
             };
-
-            if (type != SolutionType.Both)
-            {
-                query.Criteria.AddCondition("ismanaged", ConditionOperator.Equal, (type == SolutionType.Managed));
-            }
             // Add link-entity QEsolution_publisher
             var publink = query.AddLink("publisher", "publisherid", "publisherid", JoinOperator.Inner);
             publink.EntityAlias = "pub";

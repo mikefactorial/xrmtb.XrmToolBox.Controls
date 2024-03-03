@@ -1,65 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 using Microsoft.Xrm.Sdk;
-using static xrmtb.XrmToolBox.Controls.CrmActions;
+using Microsoft.Xrm.Sdk.Metadata;
 
 namespace xrmtb.XrmToolBox.Controls
 {
-    public partial class SolutionsDropdownControl : XrmToolBoxControlBase
+    /// <summary>
+    /// Shared XrmToolBox Control that will load a list of entities into a Dropdown control
+    /// </summary>
+    public partial class EntitiesDropdownControl : XrmToolBoxControlBase
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public SolutionsDropdownControl()
+        public EntitiesDropdownControl()
         {
             InitializeComponent();
         }
 
-        private List<string> _publisherPrefixes = new List<string>();
-
+        #region Public Properties
         /// <summary>
-        /// Reference to the Parent Entity for the attributes
+        /// Defines which Entity types should be loaded on retrieve.
         /// </summary>
         [Category("XrmToolBox")]
-        [DisplayName("Publisher Prefix Filters")]
-        [Description("Load solutoins for only the Publisher Prefixes provided in the list")]
-        [Browsable(true)]
-        [Editor(@"System.Windows.Forms.Design.StringCollectionEditor,System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            typeof(System.Drawing.Design.UITypeEditor))]
-        // [TypeConverter(typeof(CsvConverter))]
-        public List<string> PublisherPrefixes { get => _publisherPrefixes; set => _publisherPrefixes = value; }
+        [DisplayName("Solution Filter")]
+        [Description("Specifies a Solution Unique Name filter to be used when retrieving Entities.")]
+        public string SolutionFilter { get; set; }
 
         /// <summary>
-        /// The currently selected Solution object in the ListView
+        /// The currently selected EntityMetadata object in the ListView
         /// </summary>
-        [DisplayName("Selected Solution")]
-        [Description("The Solution that is currently selected in the Dropdown.")]
+        [DisplayName("Selected Entity")]
+        [Description("The Entity that is currently selected in the Dropdown.")]
         [Category("XrmToolBox")]
         [Browsable(false)]
-        public Entity SelectedSolution { get; private set; } = null;
+        public EntityMetadata SelectedEntity { get; private set; } = null;
 
         /// <summary>
         /// List of all loaded EntityMetadata objects for the current connection
         /// </summary>
-        [Description("List of all Solutions that have been loaded into the Dropdown.")]
+        [Description("List of all Entities that have been loaded into the Dropdown.")]
         [Category("XrmToolBox")]
         [Browsable(false)]
-        public List<Entity> AllSolutions { get; private set; } = null;
+        public List<EntityMetadata> AllEntities { get; private set; } = null;
 
         /// <summary>
-        /// Reference to all Attributes as a bindable list
+        /// Reference to all Entities as a bindable list
         /// </summary>
         [Category("XrmToolBox")]
-        [Description("Reference to all Solutions as a bindable list")]
+        [Description("Reference to all Entities as a bindable list")]
         [Browsable(false)]
-        public List<ListDisplayItem> AllSolutionsBindable { get => comboSolutions.DataSource as List<ListDisplayItem>; }
+        public List<ListDisplayItem> AllEntitiesBindable { get => comboEntities.DataSource as List<ListDisplayItem>; }
+        #endregion
 
         #region Event Definitions
         /// <summary>
@@ -70,6 +65,7 @@ namespace xrmtb.XrmToolBox.Controls
         public event EventHandler SelectedItemChanged;
         #endregion
 
+
         #region IXrmToolBoxControl methods
         /// <summary>
         /// Clear all loaded data in your control
@@ -78,23 +74,24 @@ namespace xrmtb.XrmToolBox.Controls
         {
             OnBeginClearData();
 
-            if (SelectedSolution != null)
+            if (SelectedEntity != null)
             {
-                SelectedSolution = null;
+                SelectedEntity = null;
                 SelectedItemChanged?.Invoke(this, new EventArgs());
             }
-            
-            AllSolutions?.Clear();
-            AllSolutions = new List<Entity>();
 
-            comboSolutions.DataSource = null;
-            comboSolutions.Items.Clear();
+            AllEntities?.Clear();
+            AllEntities = new List<EntityMetadata>();
+
+            comboEntities.DataSource = null;
+            comboEntities.Items.Clear();
 
             base.ClearData();
         }
 
         /// <summary>
-        /// Load data into the control
+        /// Load the Entities using the current IOrganizationService.
+        /// The call is asynchronous and will leverage the WorkAsync object on the parent XrmToolBox control
         /// </summary>
         public override void LoadData()
         {
@@ -117,7 +114,7 @@ namespace xrmtb.XrmToolBox.Controls
 
             if (Service == null)
             {
-                var ex = new InvalidOperationException("The Service reference must be set before loading the Solutions list");
+                var ex = new InvalidOperationException("The Service reference must be set before loading the Entities list");
 
                 // raise the error event and if set, throw error
                 OnNotificationMessage(ex.Message, MessageLevel.Exception, ex);
@@ -128,30 +125,43 @@ namespace xrmtb.XrmToolBox.Controls
                 }
                 return;
             }
+
             ToggleMainControlsEnabled(false);
+
             ClearData();
 
             try
             {
-                OnProgressChanged(0, "Begin loading Solutions from CRM");
+                OnProgressChanged(0, "Begin loading Entities from CRM");
 
                 // retrieve all entities and bind to the combo
+                // var entities = CrmActions.RetrieveAllEntities(Service);
                 var worker = new BackgroundWorker();
 
                 worker.DoWork += (w, e) => {
-                    var entities = CrmActions.RetrieveSolutions(Service, SolutionType, PublisherPrefixes);
+
+                    var entities = new List<EntityMetadata>();
+                    if (SolutionFilter != null)
+                    {
+                        entities = CrmActions.RetrieveEntitiesForSolution(Service, SolutionFilter);
+                    }
+                    else
+                    {
+                        entities = CrmActions.RetrieveAllEntities(Service);
+                    }
+
                     e.Result = entities;
                 };
 
                 worker.RunWorkerCompleted += (s, e) =>
                 {
-                    var entities = e.Result as List<Entity>;
+                    var entities = e.Result as List<EntityMetadata>;
 
-                    AllSolutions = entities;
+                    AllEntities = entities;
 
                     LoadComboItems();
 
-                    OnProgressChanged(100, "Loading Solutions from CRM Complete!");
+                    OnProgressChanged(100, "Loading Entities from CRM Complete!");
 
                     base.LoadData();
                 };
@@ -163,13 +173,11 @@ namespace xrmtb.XrmToolBox.Controls
             {
                 OnNotificationMessage($"An error occured attetmpting to load the list of Entities", MessageLevel.Exception, ex);
 
-                if (throwException)
-                {
+                if (throwException) {
                     throw ex;
                 }
             }
         }
-
         #endregion
 
         #region Private helper methods
@@ -178,56 +186,45 @@ namespace xrmtb.XrmToolBox.Controls
         /// </summary>
         private void LoadComboItems()
         {
-            comboSolutions.SuspendLayout();
+            comboEntities.SuspendLayout();
 
-            comboSolutions.DataSource = null;
+            comboEntities.DataSource = null;
 
-            var items = from ent in AllSolutions
-                        select 
-                        new ListDisplayItem( 
-                            (string)ent["uniquename"], 
-                            (string)ent["friendlyname"], 
-                            (ent.Attributes.ContainsKey("description")) ? (string)ent["description"] : "", 
+            var items = from ent in AllEntities
+                        select new ListDisplayItem(
+                            ent.SchemaName, 
+                            CrmActions.GetLocalizedLabel(ent.DisplayName, ent.SchemaName, LanguageCode),
+                            CrmActions.GetLocalizedLabel(ent.Description, null, LanguageCode), 
                             ent);
 
-            comboSolutions.DataSource = items.OrderBy(e => e.DisplayName).ToList();
-            comboSolutions.DisplayMember = "SummaryName";
-            comboSolutions.ValueMember = "Name";
+            comboEntities.DataSource = items.OrderBy(e => e.Name).ToList();
+            comboEntities.DisplayMember = "SummaryName";
+            comboEntities.ValueMember = "Name";
 
-            comboSolutions.ResumeLayout();
+            comboEntities.ResumeLayout();
 
             ToggleMainControlsEnabled(true);
         }
 
         #endregion
 
-        #region Control Properties
-        /// <summary>
-        /// Type of solutions to show in the drop down
-        /// </summary>
-        public SolutionType SolutionType { get; set; }
-        /// <summary>
-        /// Reference to the Combo Box control
-        /// </summary>
-        public ComboBox ComboBox => comboSolutions;
-        #endregion 
         #region Control event handlers
 
-        private void ComboSolutions_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboEntities_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboSolutions.SelectedItem is ListDisplayItem item)
+            if (comboEntities.SelectedItem is ListDisplayItem item)
             {
                 // check to see if we want to raise the change event
-                var ent = item.Object as Entity;
-                if (ent.Id == SelectedSolution?.Id)
+                var ent = item.Object as EntityMetadata;
+                if (ent.LogicalName == SelectedEntity?.LogicalName)
                 {
                     return;
                 }
                 // new entity, set and raise the event
-                SelectedSolution = ent;
+                SelectedEntity = ent;
             }
             else {
-                SelectedSolution = null;
+                SelectedEntity = null;
             }
             SelectedItemChanged?.Invoke(this, new EventArgs());
         }

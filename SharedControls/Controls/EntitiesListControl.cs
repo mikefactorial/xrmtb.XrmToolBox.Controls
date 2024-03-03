@@ -118,22 +118,9 @@ namespace xrmtb.XrmToolBox.Controls
         }
 
         /// <summary>
-        /// Reference to the Solution Drop Down control
+        /// Reference to the Solution Drop Down Combo Box control
         /// </summary>
-        public SolutionsDropdownControl SolutionsDropDown => this.solutionsDropdown;
-        /// <summary>
-        /// Reference to the Check All or None Check Box control
-        /// </summary>
-        public CheckBox CheckBoxCheckAllNone => this.checkBoxCheckAllNone;
-        /// <summary>
-        /// Reference to the List View control
-        /// </summary>
-        public ListView EntityListView => this.ListViewMain;
-
-        /// <summary>
-        /// Reference to the Split Container in the ToolBar
-        /// </summary>
-        public SplitContainer SplitContainerToolbar => this.splitContainerToolbar;
+        public ComboBox SolutionsDropDown => this.solutionsDropdown.ComboBox;
 
         #endregion
 

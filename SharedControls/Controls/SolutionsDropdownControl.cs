@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Xrm.Sdk;
-using static xrmtb.XrmToolBox.Controls.CrmActions;
 
 namespace xrmtb.XrmToolBox.Controls
 {
@@ -139,7 +138,7 @@ namespace xrmtb.XrmToolBox.Controls
                 var worker = new BackgroundWorker();
 
                 worker.DoWork += (w, e) => {
-                    var entities = CrmActions.RetrieveSolutions(Service, SolutionType, PublisherPrefixes);
+                    var entities = CrmActions.RetrieveSolutions(Service, PublisherPrefixes);
                     e.Result = entities;
                 };
 
@@ -202,10 +201,6 @@ namespace xrmtb.XrmToolBox.Controls
         #endregion
 
         #region Control Properties
-        /// <summary>
-        /// Type of solutions to show in the drop down
-        /// </summary>
-        public SolutionType SolutionType { get; set; }
         /// <summary>
         /// Reference to the Combo Box control
         /// </summary>

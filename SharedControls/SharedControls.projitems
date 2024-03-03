@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f6576cab-e7c6-42d9-be55-f2ee50161d21</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SharedControls</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AttributeDropdownBaseControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AttributeDropdownBaseControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AttributeDropdownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AttributeDropdownControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AttributeListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AttributeListControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\BoundDropdownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\BoundDropdownControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\BoundListViewControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\BoundListViewControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CDSDataComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CDSDataComboBox.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CDSDataTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CDSDataTextBox.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CDSLookupDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CDSLookupDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CDSLookupDialogForm.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CRMGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\CRMGridView.designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntitiesCollectionListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntitiesCollectionListView.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntitiesDropdownBaseControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntitiesDropdownBaseControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntitiesDropdownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntitiesDropdownControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntitiesListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntitiesListControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntityMetadataListViewBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\EntityMetadataListViewBase.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\FilteredListViewBaseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\FilteredListViewBaseControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\GlobalOptionSetListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\GlobalOptionSetListControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\IXrmToolboxControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\SolutionsDropdownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\SolutionsDropdownControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ViewsDropdownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ViewsDropdownControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\XMLViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\XmlViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\XmlViewerControl.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\XrmToolBoxControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\XrmToolBoxControlBase.Designer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\CDSRecordEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\CharacterEncoder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ConfigurationInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\CrmActions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\CRMRecordEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\EntityCollectionSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\EntityMetadataProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\EntitySerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\EntityWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\JsonFormat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ListDisplayItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ListViewColumnDef.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\LookupHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\MetadataHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\SerializationStyle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\Utility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ViewConsts.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\XMLViewerSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\AttributeDropdownBaseControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\AttributeDropdownControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\AttributeListControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\BoundListViewControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\CDSLookupDialogForm.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\CRMGridView.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\EntitiesDropdownControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\EntitiesListControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\EntityMetadataListViewBase.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\FilteredListViewBaseControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\GlobalOptionSetListControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\SolutionsDropdownControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\ViewsDropdownControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\XMLViewer.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\XmlViewerControl.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\XrmToolBoxControlBase.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Properties\Resources.resx">
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
