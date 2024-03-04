@@ -30,6 +30,7 @@ namespace xrmtb.XrmToolBox.Controls
             get { return _config.EntityTypes; }
             set { _config.EntityTypes = value; }
         }
+        
         /// <summary>
         /// Defines which Entity types should be loaded on retrieve.
         /// </summary>
@@ -115,7 +116,6 @@ namespace xrmtb.XrmToolBox.Controls
             get { return _config.RetrieveAsIfPublished; }
             set { _config.RetrieveAsIfPublished = value; }
         }
-
         #endregion
 
         #region Runtime Properties
