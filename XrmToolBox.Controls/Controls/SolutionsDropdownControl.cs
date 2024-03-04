@@ -60,6 +60,14 @@ namespace xrmtb.XrmToolBox.Controls
         [Browsable(false)]
         public List<ListDisplayItem> AllSolutionsBindable { get => comboSolutions.DataSource as List<ListDisplayItem>; }
 
+        /// <summary>
+        /// Type of solutions to show in the drop down
+        /// </summary>
+        [Category("XrmToolBox")]
+        [Description("Type of solutions to show in the drop down")]
+        [Browsable(false)]
+        public CrmActions.SolutionType SolutionType { get; set; }
+
         #region Event Definitions
         /// <summary>
         /// Event that fires when the Selected Item changes
@@ -138,7 +146,7 @@ namespace xrmtb.XrmToolBox.Controls
                 var worker = new BackgroundWorker();
 
                 worker.DoWork += (w, e) => {
-                    var entities = CrmActions.RetrieveSolutions(Service, PublisherPrefixes);
+                    var entities = CrmActions.RetrieveSolutions(Service, SolutionType, PublisherPrefixes);
                     e.Result = entities;
                 };
 
