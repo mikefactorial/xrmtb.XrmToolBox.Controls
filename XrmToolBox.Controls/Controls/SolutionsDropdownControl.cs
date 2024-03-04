@@ -200,12 +200,6 @@ namespace xrmtb.XrmToolBox.Controls
 
         #endregion
 
-        #region Control Properties
-        /// <summary>
-        /// Reference to the Combo Box control
-        /// </summary>
-        public ComboBox ComboBox => comboSolutions;
-        #endregion 
         #region Control event handlers
 
         private void ComboSolutions_SelectedIndexChanged(object sender, EventArgs e)

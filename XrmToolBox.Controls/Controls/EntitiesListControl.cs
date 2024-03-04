@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Forms;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
 
@@ -116,11 +115,6 @@ namespace xrmtb.XrmToolBox.Controls
             get { return _config.RetrieveAsIfPublished; }
             set { _config.RetrieveAsIfPublished = value; }
         }
-
-        /// <summary>
-        /// Reference to the Solution Drop Down Combo Box control
-        /// </summary>
-        public ComboBox SolutionsDropDown => this.solutionsDropdown.ComboBox;
 
         #endregion
 
